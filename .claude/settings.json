@@ -1,0 +1,87 @@
+{
+  "cleanupPeriodDays": 99999,
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat '<ASSISTANT_ROOT>/SOUL/persona/persona_SOUL.md'",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat '<ASSISTANT_ROOT>/USER/USER.md'",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat '<ASSISTANT_ROOT>/MEMORY/semantic_memory.md'",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/timesense.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/thinking_protocol.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/session_context_check.sh",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "晚安|今天就到这儿",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/session_end.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read|Edit|Write|Grep|Glob|mcp__tools__read|mcp__tools__edit|mcp__tools__write|mcp__tools__grep|mcp__tools__glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/io_batch_check.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "autoMemoryEnabled": false,
+  "permissions": {
+    "allow": [
+      "Bash(shutdown:*)"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+.env
+.env.*
+*.log
+*.tmp
+__pycache__/
+*.pyc
+
+# 保留模板文件；忽略本地运行临时区。
+assistant/**/_local/
+assistant/**/.obsidian/
+
+# 本地安全备份，只保留在发布者机器上。
+.pre-mass-fix-backup-*/
