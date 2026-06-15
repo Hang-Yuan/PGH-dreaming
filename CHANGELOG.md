@@ -8,6 +8,20 @@ Predictive Generative Harness for Claude Code · **dreaming** 线的模板版本
 - dreaming 与旧 PGH 5.x 模板线分流：两条线互不追溯、互不升级。旧线用户若要迁到 dreaming，按 `§-1` 重新部署。
 - 每次发布只记录公开模板结构、入口协议、初始化流程、hook / skill / assistant 骨架变化。
 
+## v6.0.1 · 移除 io_batch_check hook
+
+移除 v6.0.0 引入的 `io_batch_check` hook。该 hook 在 IO 工具调用时注入"批量 IO 打包派 storage-agent"提醒，实践中判定为伪护栏：
+
+- **不基于真实成本**：只统计转写最近若干行的 IO 调用次数，与实际 token / 开销无关，触发与否不对应成本。
+- **不改变权限**：只注入 additionalContext 文本，不做 permissionDecision，对真正要防的 sub-agent 扇出失控没有硬约束力。
+- **重复注入吃上下文**：达阈值后每次 IO 调用重复注入同一句，反而消耗主会话上下文。
+
+IO 经济真正靠 sub-agent 工具白名单（storage-agent 承接批量 IO）与主会话派单纪律，不靠这条软提醒。
+
+### hooks
+
+- hooks 由 5 个减为 4 个：`timesense` / `thinking_protocol` / `session_context_check` / `session_end`。移除 `io_batch_check`。
+
 ## v6.0.0 · PGH dreaming 新起点
 
 dreaming 把记忆代谢从"每条消息实时判断写入"翻转为**白天零写入、夜间集中代谢**。这是相对旧 5.x 模板线的一次范式重构，不是补丁，因此另起新线、新仓库、新版本号。

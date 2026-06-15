@@ -64,18 +64,6 @@
           }
         ]
       }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Read|Edit|Write|Grep|Glob|mcp__tools__read|mcp__tools__edit|mcp__tools__write|mcp__tools__grep|mcp__tools__glob",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/hooks/io_batch_check.sh",
-            "timeout": 5
-          }
-        ]
-      }
     ]
   },
   "autoMemoryEnabled": false,

@@ -26,7 +26,7 @@ PGH dreaming 的文件分三类，**部署 / 阅读 / 写入** 角色不同：
 |---|---|---|
 | `.claude/CLAUDE.md` | 全局指令主控（启动序列 / 系统原则 / 行为规则 / 记忆系统 / 故障恢复）| AI 启动必读，不写 |
 | `.claude/settings.json` | hooks 配置 | AI 启动读取，不写 |
-| `.claude/hooks/*.sh` | 逐消息 hook（时间感知 / 思考协议 / 节点收尾 / 批量 IO 提醒 / 会话结束）| AI 触发，不写 |
+| `.claude/hooks/*.sh` | 逐消息 hook（时间感知 / 思考协议 / 节点收尾 / 会话结束）| AI 触发，不写 |
 | `.claude/skills/*/SKILL.md` | 工作流（dream / daily-review / weekly-review / close-node / write-progress / create-project / new-file / week-sync / manage-research-reference）| AI 按情境调用，不写 |
 | `.claude/agents/general-search-agent.md` | 通用检索 sub-agent | AI 调用，不写 |
 | `.claude/agents/storage-agent.md` | 文件 IO sub-agent（长文件摘要 / log 落盘 / 全量归档 / dream 转写分段回放）| AI 派单，不写判断 |
@@ -114,10 +114,9 @@ PGH 不管 Claude Code 本身的安装——上游官方安装完后再把上面
 | `timesense.sh` | 每条消息 | 注入当前时间 |
 | `thinking_protocol.sh` | 每条消息 | 注入四步思考协议 |
 | `session_context_check.sh` | 每条消息 | 提示节点收尾和项目加载 |
-| `io_batch_check.sh` | IO 工具调用 | 提示批量 IO 打包派 storage-agent，省主会话上下文 |
 | `session_end.sh` | 告别语 | 触发 daily-review（含排定当晚 dream）|
 
-> dreaming 不再有逐消息的记忆信号 hook（旧版 `memory_signal.sh`）——记忆判断从实时改为夜间回放，白天的 hook 只管时间、思考协议、节点提醒和 IO 经济。
+> dreaming 不再有逐消息的记忆信号 hook（旧版 `memory_signal.sh`）——记忆判断从实时改为夜间回放，白天的 hook 只管时间、思考协议和节点提醒。
 
 ---
 
