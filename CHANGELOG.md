@@ -8,7 +8,15 @@ Predictive Generative Harness for Claude Code · **dreaming** 线的模板版本
 - dreaming 与旧 PGH 5.x 模板线分流：两条线互不追溯、互不升级。旧线用户若要迁到 dreaming，按 `§-1` 重新部署。
 - 每次发布只记录公开模板结构、入口协议、初始化流程、hook / skill / assistant 骨架变化。
 
-## v6.0.1 · 移除 io_batch_check hook
+## v6.0.2 · daily-review 排后核验降级容错
+
+`daily-review` skill 排梦步骤的「排后核验」增加降级路径：CronList 工具调用解析失败时不阻断流程，改以 CronCreate 成功回执作替代证据，步骤 7 道别时明示核验降级，留 `last_dream` / MEMORY_LOG 事后地面确认，明早 week-sync 接住。
+
+### skills
+
+- `daily-review` 步骤 6 排后核验：CronList 失败 → 降级核验而非阻断道别流程。
+
+
 
 移除 v6.0.0 引入的 `io_batch_check` hook。该 hook 在 IO 工具调用时注入"批量 IO 打包派 storage-agent"提醒，实践中判定为伪护栏：
 
