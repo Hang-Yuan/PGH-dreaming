@@ -1,7 +1,7 @@
 ---
 name: daily-review
 description: 对话结束汇总流程。v5.5 重构：本 skill 只跑在场段（阶段 A 工作库固化 + 排梦），全部记忆代谢移交当晚 dream 无人值守执行。规则权威源 = MEMORY/00.memory_agent.md，log 格式权威源 = storage-agent.md。告别语触发后先完整执行在场段，再回应道别。
-updated: 2026-06-12
+updated: 2026-06-16
 ---
 
 # daily-review
