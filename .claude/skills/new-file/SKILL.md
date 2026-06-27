@@ -11,7 +11,7 @@ updated: 2026-06-10
 ## 触发
 
 - 在 `<ASSISTANT_ROOT>/` 下新写入任何 `.md` 文件。
-- `create-project` / `write-progress` / `close-node` / `manage-research-reference` / `weekly-review`（新周与归档文件）等流程中新建 `.md` 文件时同步调用。
+- `create-project` / `write-progress` / `close-node` / `weekly-review`（新周与归档文件）等流程中新建 `.md` 文件时同步调用。
 - 直接 Write / Edit 生成新 `.md`，且未经过其他 skill 时，也必须调用。
 
 ## 加载链字段

@@ -2,7 +2,7 @@
 title: 记忆系统日志
 type: runtime-log
 purpose: 记忆系统代谢记录（episodic / semantic 三层流转 + 周复盘 + 毕业归档）
-last_updated: 2026-06-11
+last_updated: 2026-06-28
 ---
 
 # 记忆系统日志
@@ -10,12 +10,12 @@ last_updated: 2026-06-11
 ## 加载链（上下游）
 
 **上游（由谁加载本文件）：**
-不在启动序列必须层。按需加载（审查记忆操作历史时）；daily-review / weekly-review 时写入。
+不在启动序列必须层。按需加载（审查记忆操作历史时）；dream / weekly-review 周日载荷经 storage-agent 写入。
 
 **同级联动：**
 - `00.memory_agent.md` — 写入格式 / 代谢规则 / 判断锚点（规则权威）
 - `episodic_memory.md` — 1-3 星情景层候选 schema
-- `semantic_memory.md` — 4-6 星启动注入语义 schema（8 预警 / 10 硬上限）
+- `semantic_memory.md` — 4-6 星语义 schema 中间工作区（活跃组 8 预警 / 10 硬上限）
 - `_archive/semantic_archive.md` — 语义层证据 / 命中 / 演化记录
 - `_archive/MEMORY_LOG_archive/` — 按自然季度归档
 - `ITERATION_LOG.md` — 架构 / skill / hook / 协议 / 区域 agent 变更走 ITERATION_LOG，MEMORY_LOG 只管记忆代谢

@@ -8,6 +8,27 @@ Predictive Generative Harness for Claude Code · **dreaming** 线的模板版本
 - dreaming 与旧 PGH 5.x 模板线分流：两条线互不追溯、互不升级。旧线用户若要迁到 dreaming，按 `§-1` 重新部署。
 - 每次发布只记录公开模板结构、入口协议、初始化流程、hook / skill / assistant 骨架变化。
 
+## v6.1.0 · semantic 退注入 + meta-skill 蒸馏器 + 记忆系统结构
+
+dreaming 起点之后第一次 feature 级更新：三块——记忆架构（semantic 退出启动注入）、新增 meta-skill（把判断工作流蒸馏成 SKILL.md 的元 skill）、memory_agent 补全结构性全景节。
+
+### 记忆架构变化
+
+- **semantic 退出启动注入**：`semantic_memory.md` 从"启动注入层"降级为 **dream 中间工作区**——白天不进运行时上下文，仅夜间被 dream 作为代谢对照基线读取。白天运行时的共同世界模型底座收缩为 **USER + SOUL + CLAUDE.md §R 三件套身份层**。启动序列由 7 步精简为 5 步（删 semantic 读取 + storage-agent 日志读取两步）。
+- **升格门重构**：跨情景 episodic → semantic 的唯一升格门改为**周日横向统合**；`★★★ 再命中` 从升格触发器重定义为**怀疑触发器**（标 `待统合簇` 留周日判去向），避免母结构的多个表面各自单条升格、碎片化 semantic。
+- **代谢对照基线显式化**：明确两轴判定本质是差分运算，对照基线 = 现有 schema 全集三层（episodic / semantic / 身份层），各自比对对象与角色成文。
+
+### skills
+
+- **新增 `meta-skill`**：把一条「长链复杂判断工作流」蒸馏成可自动执行的 SKILL.md 的元 skill。9 步流程（锁定目标函数 → 切执行段/判断节点 → 四相位挖三件套 → 判据分流 → 缺料推理 → 编码 → 触发 eval → 检验回流 → Improve 迭代），含 `scripts/`（机械闸 validate / 指针审 anchor_check / eval 编排）+ `references/`（schemas / verification）+ `agents/`（grader / comparator / analyzer）+ eval-viewer。吸收 Anthropic skill-creator 2.0 工程检验层。
+- **移除 `manage-research-reference`**：文献容器 `_reference/` 的创建内联进 `create-project`（科研类项目首次需要文献时直接建 + `文献记录.md`），不再单设专用 skill。skills 数 9 不变（9 原有 − 1 + meta-skill）。
+- `dream` / `weekly-review` / `week-sync`：同步 semantic 退注入口径（"启动注入组"→"活跃组"）；`dream` 流程补容量扫描独立步 + 代谢对照基线在场约束。
+
+### 文档
+
+- `assistant/MEMORY/00.memory_agent.md`（→ v5.8.0）：新增 `## 记忆系统结构` 全景节（schema 定义 / 信息流与分流图 / 代谢对照基线 / 生命周期）；零上下文 agent 仅凭本节即可推导代谢该和什么比对。
+- `.claude/CLAUDE.md §R` 思考协议加深：协议是"遇到问题就启动的处理机"（不止每轮开头）；执行中遇新问题返回 ② 重检索（非返回 ③）。
+
 ## v6.0.2 · daily-review 排后核验降级容错
 
 `daily-review` skill 排梦步骤的「排后核验」增加降级路径：CronList 工具调用解析失败时不阻断流程，改以 CronCreate 成功回执作替代证据，步骤 7 道别时明示核验降级，留 `last_dream` / MEMORY_LOG 事后地面确认，明早 week-sync 接住。

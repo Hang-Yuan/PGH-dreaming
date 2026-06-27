@@ -21,16 +21,6 @@
             "timeout": 5
           }
         ]
-      },
-      {
-        "matcher": "compact",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "cat '<ASSISTANT_ROOT>/MEMORY/semantic_memory.md'",
-            "timeout": 5
-          }
-        ]
       }
     ],
     "UserPromptSubmit": [

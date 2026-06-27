@@ -295,7 +295,7 @@ updated: YYYY-MM-DD
 |---|---|
 | 大型阶段性结论 | 项目主文档（`[项目名] vX.Y-draft.md` 或等价物）版本化固化 |
 | 小阶段性结论 | 推论链节点的"结论"字段 + 推进展开子文件末尾 |
-| 文献引用 | 见 `manage-research-reference` skill（科研类项目） |
+| 文献引用 | 科研类项目建 `_reference/` 容器 + `文献记录.md`（create-project 首次建项目时按需创建） |
 | 跨项目结论 | 权威落点写一份，其他项目加指针（见 项目区_agent 跨引用规则） |
 
 ---
@@ -337,7 +337,7 @@ updated: YYYY-MM-DD
 - **段间转换不可省略**——L2 用 `**开出**` / `新问题`，L3 用 `问题承接` + `→ 开出的新问题` / `→ 本节收束`
 - **指针粒度灵活**——文件 / 文件§节都可
 - **分支保留并行**——不强行合并未交汇的分支
-- **文献规范不在本 skill**——见 `manage-research-reference`
+- **文献规范不在本 skill**——科研类项目的 `_reference/` 容器由 create-project 建
 - **不直接写记忆池**——`_progress` 是项目推论链权威源，不是 `episodic_memory.md` 或 `semantic_memory.md` 的写入落点。
 - **不把段间转换自动抽象为 S**——只有 close-node / dream（周日载荷）在读取转向理由后，才能判断是否形成可迁移 schema。
 - **不替代记忆代谢**——升星、衰减、毕业、情景层归档均不在本 skill 执行。

@@ -1,6 +1,4 @@
 ---
-
-
 name: create-project
 description: 新建项目流程。建项目目录 + `_overview.md` + 同步 portfolio。判断进入新项目（目标项目目录尚不存在）且用户确认新建时调用。
 updated: 2026-06-10
@@ -21,7 +19,6 @@ updated: 2026-06-10
 **同级联动**：
 - `new-file` skill — 新建 `_overview.md` 时强制补加载链
 - `write-progress` skill — 用户首次需要推进记录时调用，由它建 `_progress/` 容器与管家文件
-- `manage-research-reference` skill — 项目首次需要文献管理时调用（科研类）
 
 ---
 
@@ -53,7 +50,7 @@ updated: 2026-06-10
 ├── _overview.md       ← 项目入口（必建，步骤 3）
 ├── [项目主文档].md     ← 项目核心产出（按需）
 ├── _progress/         ← 推进记录容器（首次需要时由 write-progress skill 建）
-├── _reference/        ← 外部素材容器（首次需要时由 manage-research-reference skill 建）
+├── _reference/        ← 外部素材容器（科研类项目首次需要时直接建）
 └── _archive/          ← 归档容器（首次归档时建）
 ```
 
@@ -117,7 +114,7 @@ updated: YYYY-MM-DD
 
 ### 子目录（按需建立）
 - `_progress/` — 推进记录容器（首次需要推进记录时由 write-progress skill 建立）
-- `_reference/` — 外部素材 / 文献（首次需要文献时由 manage-research-reference skill 建立）
+- `_reference/` — 外部素材 / 文献（科研类项目首次需要文献时直接建立 + `文献记录.md`）
 - `_archive/` — 归档（第一次归档时建）
 
 ---
@@ -131,7 +128,7 @@ updated: YYYY-MM-DD
 理论研究 / 系统工程等需要持续推理链的项目，首次进入推进记录时交给 `write-progress` 建 `_progress/`；段间转换标记定义权威源 = write-progress §2.3 追加与扩展（本模板不复制标记清单）。
 
 [若 project_type = 理论研究]
-文献管理见 `manage-research-reference` skill。
+文献管理：建 `_reference/` 容器 + `文献记录.md`（首次需要文献时直接创建，记录条目格式 = 标题 / 来源 / 关键结论 / 指针）。
 
 ---
 
@@ -147,7 +144,6 @@ updated: YYYY-MM-DD
 | 触发 | 调用 skill | 建什么 |
 |---|---|---|
 | 用户首次需要推进记录（"开始记录推进 / 写一下今天进展"等） | `write-progress` | `_progress/` 容器 + 管家文件 + 首节点 |
-| 用户首次需要文献管理（科研类项目首次引用文献） | `manage-research-reference` | `_reference/` 容器 + `文献记录.md` |
 | 用户进入第一个实质内容产出（写理论 draft / 课程大纲等） | （直接建主文档，无 skill 介入） | `[项目主文档].md` |
 | 首次归档旧版本 | （直接建 `_archive/` 移入文件） | `_archive/` |
 
