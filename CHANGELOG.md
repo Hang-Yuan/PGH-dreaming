@@ -10,7 +10,7 @@ Predictive Generative Harness for Claude Code · **dreaming** 线的模板版本
 
 ## v6.1.0 · semantic 退注入 + meta-skill 蒸馏器 + 记忆系统结构
 
-dreaming 起点之后第一次 feature 级更新：三块——记忆架构（semantic 退出启动注入）、新增 meta-skill（把判断工作流蒸馏成 SKILL.md 的元 skill）、memory_agent 补全结构性全景节。
+dreaming 起点之后第一次 feature 级更新：四块——记忆架构（semantic 退出启动注入）、新增 meta-skill（把判断工作流蒸馏成 SKILL.md 的元 skill）、memory_agent 补全结构性全景节、Focus Zone 周工作台机制重写。
 
 ### 记忆架构变化
 
@@ -23,10 +23,13 @@ dreaming 起点之后第一次 feature 级更新：三块——记忆架构（se
 - **新增 `meta-skill`**：把一条「长链复杂判断工作流」蒸馏成可自动执行的 SKILL.md 的元 skill。9 步流程（锁定目标函数 → 切执行段/判断节点 → 四相位挖三件套 → 判据分流 → 缺料推理 → 编码 → 触发 eval → 检验回流 → Improve 迭代），含 `scripts/`（机械闸 validate / 指针审 anchor_check / eval 编排）+ `references/`（schemas / verification）+ `agents/`（grader / comparator / analyzer）+ eval-viewer。吸收 Anthropic skill-creator 2.0 工程检验层。
 - **移除 `manage-research-reference`**：文献容器 `_reference/` 的创建内联进 `create-project`（科研类项目首次需要文献时直接建 + `文献记录.md`），不再单设专用 skill。skills 数 9 不变（9 原有 − 1 + meta-skill）。
 - `dream` / `weekly-review` / `week-sync`：同步 semantic 退注入口径（"启动注入组"→"活跃组"）；`dream` 流程补容量扫描独立步 + 代谢对照基线在场约束。
+- `week-sync`：补入 Focus Zone 孤儿文件机制的只读执行段——周一首会话列孤儿文件并给可能归属建议，等待用户拍板，不自动移动文件。
 
 ### 文档
 
 - `assistant/MEMORY/00.memory_agent.md`（→ v5.8.0）：新增 `## 记忆系统结构` 全景节（schema 定义 / 信息流与分流图 / 代谢对照基线 / 生命周期）；零上下文 agent 仅凭本节即可推导代谢该和什么比对。
+- `assistant/00 专注区/00.专注区_agent.md`（→ v6.1）：重写专注区定义——专注区是按周切片的工作台，不是工作节律模板；新增孤儿文件机制，保证无家可归的文件 / 想法每周被重新提示、由用户拍板归属。
+- `assistant/00 专注区/_本周.md`：模板补齐原始口述 / 任务清单 / 孤儿文件 / 进展记录 / 风险约束 / 接续断点结构。
 - `.claude/CLAUDE.md §R` 思考协议加深：协议是"遇到问题就启动的处理机"（不止每轮开头）；执行中遇新问题返回 ② 重检索（非返回 ③）。
 
 ## v6.0.2 · daily-review 排后核验降级容错
